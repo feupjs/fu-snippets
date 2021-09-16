@@ -4,65 +4,28 @@
 
 import querystring from 'querystring'
 
+##
+```
 
-export const isHJApp = () => {
-  let res = false
-  if (window.HJSDK && window.HJSDK.isContainer()) {
-    res = true
-  }
-  return res
+```
+
+
+##
+```
+export const cutOutText = (str, limit) => {
+  const arr = str.split(' ')
+  const matchRes = str.match(/\r?\n/g)
+  const lineFeedCount = matchRes ? matchRes.length : 0
+  const result = arr.slice(0, limit + lineFeedCount).join(' ')
+  return result
 }
 
-export const isFirefox = () => {
-  let useragent = navigator.userAgent.toLowerCase()
-  return useragent.indexOf('firefox') > -1
-}
-export const isChrome = () => {
-  let useragent = navigator.userAgent.toLowerCase()
-  return useragent.indexOf('chrome') > -1
-}
-export const isMobile = () => {
-  let useragent = navigator.userAgent.toLowerCase()
-  return useragent.indexOf('mobile') > -1 || useragent.indexOf('hjapp') > -1 || useragent.indexOf('android') > -1
-}
-export const isHjIosApp = () => isHJApp() && /iPhone|iPad|iPod/i.test(navigator.userAgent)
-export const isIos = () => /iPhone|iPad|iPod/i.test(navigator.userAgent)
-
-export const isHJIPadApp = () => isHJApp() && /iPad/i.test(navigator.userAgent)
-
-export function isIPhoneX() {
-  return /iPhone/gi.test(navigator.userAgent) && (screen.height === 812 && screen.width === 375)
-}
-let barOffset
-export function getBarOffset() {
-  if (barOffset) return Promise.resolve(barOffset)
-  return new Promise((resolve) => {
-    HJSDK.invoke('getStatusBarHeight', ({ height }) => resolve(height || 0))
-  })
-}
-
-}
-
-
-export const isWeixin = () => /MicroMessenger/i.test(navigator.userAgent)
-
-export const isQQ = () => /QQ/i.test(navigator.userAgent)
-
-export function HTML2Text(htmlStr = '') {
-  if (!htmlStr) {
-    return htmlStr
-  }
-  return htmlStr.replace(/<[^>]*>/g, '').trim().replace(/&nbsp;/g, ' ')
-}
-export function HTML2TextExceptImg(htmlStr = '') {
-  if (!htmlStr) {
-    return htmlStr
-  }
-  return htmlStr.replace(/<[^(>|img)]*>/g, '').trim().replace(/&nbsp;/g, ' ')
-}
+```
 
 
 
+##
+```
 export const getWordCount = (str) => {
   const arr = str.replace(/\r?\n/g, ' ').split(' ')
   let count = 0
@@ -73,14 +36,127 @@ export const getWordCount = (str) => {
   })
   return count
 }
+```
 
-export const cutOutText = (str, limit) => {
-  const arr = str.split(' ')
-  const matchRes = str.match(/\r?\n/g)
-  const lineFeedCount = matchRes ? matchRes.length : 0
-  const result = arr.slice(0, limit + lineFeedCount).join(' ')
-  return result
+
+##
+```
+export function HTML2Text(htmlStr = '') {
+  if (!htmlStr) {
+    return htmlStr
+  }
+  return htmlStr.replace(/<[^>]*>/g, '').trim().replace(/&nbsp;/g, ' ')
 }
+
+```
+
+
+##
+```
+export function HTML2TextExceptImg(htmlStr = '') {
+  if (!htmlStr) {
+    return htmlStr
+  }
+  return htmlStr.replace(/<[^(>|img)]*>/g, '').trim().replace(/&nbsp;/g, ' ')
+}
+```
+
+
+##
+```
+
+export const isWeixin = () => /MicroMessenger/i.test(navigator.userAgent)
+
+export const isQQ = () => /QQ/i.test(navigator.userAgent)
+
+```
+
+##
+```
+
+let barOffset
+export function getBarOffset() {
+  if (barOffset) return Promise.resolve(barOffset)
+  return new Promise((resolve) => {
+    HJSDK.invoke('getStatusBarHeight', ({ height }) => resolve(height || 0))
+  })
+}
+
+}
+```
+
+
+##
+```
+export function isIPhoneX() {
+  return /iPhone/gi.test(navigator.userAgent) && (screen.height === 812 && screen.width === 375)
+}
+
+```
+
+
+##
+```
+export const isHJIPadApp = () => isHJApp() && /iPad/i.test(navigator.userAgent)
+```
+
+
+##
+```
+export const isIos = () => /iPhone|iPad|iPod/i.test(navigator.userAgent)
+
+```
+
+
+
+##
+```
+export const isHjIosApp = () => isHJApp() && /iPhone|iPad|iPod/i.test(navigator.userAgent)
+
+```
+
+
+##
+```
+export const isMobile = () => {
+  let useragent = navigator.userAgent.toLowerCase()
+  return useragent.indexOf('mobile') > -1 || useragent.indexOf('hjapp') > -1 || useragent.indexOf('android') > -1
+}
+```
+##
+```
+export const isChrome = () => {
+  let useragent = navigator.userAgent.toLowerCase()
+  return useragent.indexOf('chrome') > -1
+}
+```
+
+##
+```
+export const isFirefox = () => {
+  let useragent = navigator.userAgent.toLowerCase()
+  return useragent.indexOf('firefox') > -1
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const setCursorPosition = (pos, target) => {
   if (target.setSelectionRange) {
